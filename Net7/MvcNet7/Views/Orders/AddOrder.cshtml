@@ -1,0 +1,62 @@
+﻿@model MvcNet7.Dto.OrderDto
+@{
+    //Layout = "_Layout";
+}
+
+<div class="mt-2" style="width:50%">
+<form asp-action="AddOrder">
+    <h2>Create New Order</h2>
+
+     <div class="form-group">
+        <label class="form-label">New Order</label>
+        <input  type="text" class="form-control" placeholder="New Order" disabled>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Amount" class="control-label"></label>
+        <input asp-for="Amount" class="form-control" />
+        <span asp-validation-for="Amount" class="text-danger"></span>
+    </div>
+
+     <div class="form-group">
+        <label asp-for="OrderDate" class="control-label"></label>
+         <input asp-for="OrderDate" class="form-control" />
+        <span asp-validation-for="OrderDate" class="text-danger"></span>
+    </div>
+
+     <div class="form-group">
+            <label asp-for="CustomerId" class="control-label"></label>
+            <select asp-for="CustomerId" class="form-control"
+                    asp-items="@ViewBag.Customers">
+                @*<option value="1">-- Select Customer --</option>*@
+			</select>
+            <span asp-validation-for="CustomerId" class="text-danger" />
+	</div>
+        <div class="form-group">
+            <label asp-for="ProductId" class="control-label"></label>
+            <select asp-for="ProductId" class="form-control"
+                    asp-items="@ViewBag.Products">
+                @*<option value="1">-- Select Product --</option>*@
+            </select>
+            <span asp-validation-for="ProductId" class="text-danger" />
+        </div>
+   <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-primary" />
+    </div>
+  
+        @if (TempData["msg"] != null)
+        {
+            <div class="mb-3">
+               @TempData["msg"]
+            </div>
+        }
+    @*<a href="/Person/DisplayPersons" class="btn btn-primary">All Persons</a>*@
+
+</form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
